@@ -7,7 +7,7 @@ public class Filter
     public string Operator { get; set; }
     public string? Logic { get; set; }
 
-    public IEnumerable<Filter> Filters { get; set; }
+    public IEnumerable<Filter>? Filters { get; set; }
 
     public Filter()
     {

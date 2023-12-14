@@ -9,7 +9,7 @@ public class Entity<TId> : IEntityTimestamps
 
     public Entity()
     {
-        Id = default!;
+        Id = default;
     }
 
     public Entity(TId id)
