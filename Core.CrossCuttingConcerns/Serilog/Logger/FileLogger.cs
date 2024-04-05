@@ -7,16 +7,12 @@ namespace Core.CrossCuttingConcerns.Serilog.Logger;
 
 public class FileLogger : LoggerServiceBase
 {
-    private readonly IConfiguration _configuration;
-
     public FileLogger(IConfiguration configuration)
     {
-        _configuration = configuration;
-
-        FileLogConfiguration logConfig = configuration.GetSection("SerilogConfigurations:FileLogConfiguration")
+        var logConfig = configuration.GetSection("SerilogConfigurations:FileLogConfiguration")
             .Get<FileLogConfiguration>() ?? throw new NullReferenceException(SerilogMessages.NullOptionsMessage);
 
-        string logFilePath = string.Format(format: "{0}{1}",
+        var logFilePath = string.Format(format: "{0}{1}",
             arg0: Directory.GetCurrentDirectory() + logConfig.FolderPath, arg1: ".txt");
 
         Logger = new LoggerConfiguration().WriteTo.File(

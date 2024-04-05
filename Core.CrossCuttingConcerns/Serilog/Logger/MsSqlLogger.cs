@@ -10,13 +10,14 @@ public class MsSqlLogger : LoggerServiceBase
 {
     public MsSqlLogger(IConfiguration configuration)
     {
-        MsSqlLogConfiguration logConfig = configuration.GetSection("SerilogConfigurations:MsSqlLogConfiguration")
+        var logConfig = configuration.GetSection("SerilogConfigurations:MsSqlLogConfiguration")
             .Get<MsSqlLogConfiguration>() ?? throw new NullReferenceException(SerilogMessages.NullOptionsMessage);
 
         MSSqlServerSinkOptions sinkOptions = new()
         {
             TableName = logConfig.TableName,
-            AutoCreateSqlTable = logConfig.AutoCreateSqlTable
+            AutoCreateSqlTable = logConfig.AutoCreateSqlTable,
+            AutoCreateSqlDatabase = logConfig.AutoCreateSqlDatabase
         };
 
         ColumnOptions columnOptions = new();
